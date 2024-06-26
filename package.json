@@ -1,0 +1,24 @@
+{
+  "name": "accounts",
+  "version": "1.0.0",
+  "description": "Projeto de conta bancaria em node",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/valenteluan/Accounts.git"
+  },
+  "author": "Luan Valente",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/valenteluan/Accounts/issues"
+  },
+  "homepage": "https://github.com/valenteluan/Accounts#readme",
+  "dependencies": {
+    "chalk": "^4.1.2",
+    "inquirer": "^8.1.2"
+  }
+}
