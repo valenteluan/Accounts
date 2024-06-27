@@ -26,7 +26,7 @@ function operation() {
             if (action === 'Criar Conta') {
                 createAccount()
             } else if (action === 'Consultar Saldo') {
-
+                getAccountBalance()
             } else if (action === 'Depositar') {
                 deposit()
             } else if (action === 'Sacar') {
@@ -87,7 +87,6 @@ function buildAccount() {
 }
 
 // Depositar valor em conta
-
 function deposit() {
     inquirer.prompt([
         {
@@ -138,7 +137,7 @@ function addAmount(accoutName, amount) {
     accountData.balance = parseFloat(amount) + parseFloat(accountData.balance)
 
     fs.writeFileSync(
-        `accounts/${accoutName}.json`, 
+        `accounts/${accoutName}.json`,
         JSON.stringify(accountData),
         function (err) {
             console.log(err)
@@ -156,4 +155,27 @@ function getAccount(accoutName) {
     })
 
     return JSON.parse(accoutJSON)
+}
+
+// Funçao de consultar saldo
+function getAccountBalance() {
+    inquirer.prompt([
+        {
+            name: 'accountName',
+            message: 'Qual o nome da sua conta?'
+        }
+    ])
+        .then((answer) => {
+            const accountName = answer["accountName"]
+
+            // Verifica se a conta existe
+            if (!checkAccount(accountName)) {
+                return getAccountBalance()
+            }
+
+            const accountData = getAccount(accountName)
+            console.log(chalk.bgBlue.black(`Olá, o saldo da sua conta é de ${accountData.balance}!`))
+            operation()
+        })
+        .catch(err => console.log(err))
 }
